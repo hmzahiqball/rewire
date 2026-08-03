@@ -27,6 +27,9 @@
                     <flux:sidebar.item icon="newspaper" :href="route('content-management.blogs')" :current="request()->routeIs('content-management.blogs')" wire:navigate>
                         Blogs
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="briefcase" :href="route('content-management.services')" :current="request()->routeIs('content-management.services')" wire:navigate>
+                        Services
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
 
                 @role('super-admin|admin')
