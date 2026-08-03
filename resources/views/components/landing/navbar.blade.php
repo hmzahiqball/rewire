@@ -7,25 +7,26 @@
     <div class="mx-auto max-w-7xl px-6">
         <div class="flex h-16 items-center justify-between lg:h-20">
             <a href="{{ route('home') }}" class="flex items-center gap-3">
-                <img src="{{ asset('images/logo.png') }}" alt="Rewire Starter Kit" class="size-10 shrink-0 rounded-xl border border-brand-navy bg-brand-snow p-1.5">
+                <img src="{{ asset('images/logo.png') }}" alt="Reka Mitra Teknologi" class="size-10 shrink-0 rounded-xl border border-brand-navy bg-brand-snow p-1.5">
                 <span class="flex flex-col leading-none">
                     <span class="font-display text-lg font-bold text-brand-navy">
-                        Rewire
+                        Reka Mitra
                     </span>
                     <span class="font-mono text-[10px] font-medium uppercase tracking-widest text-brand-navy/50">
-                        Starter Kit
+                        Teknologi
                     </span>
                 </span>
             </a>
 
             <div class="hidden items-center gap-1 lg:flex">
                 @foreach ([
-                    ['label' => 'Services', 'url' => route('home').'#services'],
-                    ['label' => 'Infrastructure', 'url' => route('home').'#infrastructure'],
-                    ['label' => 'Solutions', 'url' => route('home').'#solutions'],
-                    ['label' => 'About', 'url' => route('home').'#about'],
+                    ['label' => 'Layanan', 'url' => route('home').'#services'],
+                    ['label' => 'Tentang', 'url' => route('home').'#infrastructure'],
+                    ['label' => 'Visi Misi', 'url' => route('home').'#solutions'],
+                    ['label' => 'Alur Kerja', 'url' => route('home').'#about'],
+                    ['label' => 'Portfolio', 'url' => route('gallery')],
                     ['label' => 'Blog', 'url' => route('blogs')],
-                    ['label' => 'Contact', 'url' => route('home').'#contact'],
+                    ['label' => 'Kontak', 'url' => route('home').'#contact'],
                 ] as $item)
                     <a
                         href="{{ $item['url'] }}"
@@ -41,7 +42,7 @@
                     href="{{ route('home') }}#contact"
                     class="hidden items-center gap-2 rounded-full bg-brand-navy px-5 py-2.5 text-sm font-medium text-brand-snow transition hover:bg-brand-navy-light lg:inline-flex"
                 >
-                    Get started
+                    Konsultasi Gratis
                 </a>
 
                 <button
@@ -60,12 +61,13 @@
     <div x-show="open" x-collapse x-cloak class="border-t border-brand-navy/10 lg:hidden">
         <div class="mx-auto flex max-w-7xl flex-col gap-1 px-6 py-4">
             @foreach ([
-                ['label' => 'Services', 'url' => route('home').'#services'],
-                ['label' => 'Infrastructure', 'url' => route('home').'#infrastructure'],
-                ['label' => 'Solutions', 'url' => route('home').'#solutions'],
-                ['label' => 'About', 'url' => route('home').'#about'],
+                ['label' => 'Layanan', 'url' => route('home').'#services'],
+                ['label' => 'Tentang', 'url' => route('home').'#infrastructure'],
+                ['label' => 'Visi Misi', 'url' => route('home').'#solutions'],
+                ['label' => 'Alur Kerja', 'url' => route('home').'#about'],
+                ['label' => 'Portfolio', 'url' => route('gallery')],
                 ['label' => 'Blog', 'url' => route('blogs')],
-                ['label' => 'Contact', 'url' => route('home').'#contact'],
+                ['label' => 'Kontak', 'url' => route('home').'#contact'],
             ] as $item)
                 <a
                     href="{{ $item['url'] }}"
@@ -79,7 +81,7 @@
                 href="{{ route('home') }}#contact"
                 class="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-5 py-2.5 text-sm font-medium text-brand-snow transition hover:bg-brand-navy-light"
             >
-                Get started
+                Konsultasi Gratis
             </a>
         </div>
     </div>

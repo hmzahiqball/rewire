@@ -1,9 +1,12 @@
+@props(['whyUsSection' => null])
+
 @php
-    $items = [
-        ['value' => '90', 'suffix' => '%', 'label' => 'Less boilerplate', 'sublabel' => 'per new project'],
-        ['value' => '3', 'suffix' => '', 'label' => 'Roles ready', 'sublabel' => 'super-admin, admin & staff'],
-        ['value' => '102', 'suffix' => '', 'label' => 'Tests passing', 'sublabel' => 'on every push'],
-        ['value' => '1', 'suffix' => ' day', 'label' => 'To first deploy', 'sublabel' => 'from clone to live'],
+    $section = $whyUsSection;
+    $items = $section?->extra_data['stats'] ?? [
+        ['value' => '150', 'suffix' => '+', 'label' => 'Proyek Selesai', 'sublabel' => 'di berbagai sektor industri'],
+        ['value' => '50', 'suffix' => '+', 'label' => 'Klien Puas', 'sublabel' => 'dari startup hingga enterprise'],
+        ['value' => '8', 'suffix' => '+', 'label' => 'Tahun Pengalaman', 'sublabel' => 'solusi digital terpercaya'],
+        ['value' => '30', 'suffix' => '+', 'label' => 'Tim Profesional', 'sublabel' => 'engineer & designer'],
     ];
 @endphp
 
@@ -16,13 +19,13 @@
                 <div class="flex items-center gap-3">
                     <span class="h-px w-8 bg-brand-accent"></span>
                     <span class="font-mono text-xs uppercase tracking-widest text-brand-accent">
-                        Impact
+                        Mengapa Kami
                     </span>
                 </div>
                 <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-                    Less setup.
+                    {{ $section?->title ?? 'Mengapa Memilih Kami' }}
                     <br>
-                    <span class="italic font-light text-brand-navy/50">More building.</span>
+                    <span class="italic font-light text-brand-navy/50">{{ $section?->subtitle ?? 'Komitmen kami terhadap kualitas.' }}</span>
                 </h2>
             </div>
         </div>
@@ -40,11 +43,11 @@
                     'landing-reveal-delay-3' => $loop->iteration === 4,
                 ])>
                     <div class="font-display text-5xl font-bold tracking-tight text-brand-navy lg:text-7xl">
-                        <span class="landing-counter" data-target="{{ $value }}" data-decimals="{{ $decimals }}">0</span><span class="text-brand-accent-dark">{{ $item['suffix'] }}</span>
+                        <span class="landing-counter" data-target="{{ $value }}" data-decimals="{{ $decimals }}">0</span><span class="text-brand-accent-dark">{{ $item['suffix'] ?? '' }}</span>
                     </div>
                     <div class="mt-4 border-t border-brand-navy/10 pt-4">
                         <p class="font-medium text-brand-navy">{{ $item['label'] }}</p>
-                        <p class="mt-1 text-sm text-brand-navy/50">{{ $item['sublabel'] }}</p>
+                        <p class="mt-1 text-sm text-brand-navy/50">{{ $item['sublabel'] ?? '' }}</p>
                     </div>
                 </div>
             @endforeach

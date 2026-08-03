@@ -1,8 +1,11 @@
+@props(['aboutSection' => null])
+
 @php
-    $regions = [
-        ['name' => 'Backend', 'cities' => 'Laravel 13 · Fortify · Spatie Permission'],
-        ['name' => 'Frontend', 'cities' => 'Livewire 4 · Flux UI · Tailwind v4'],
-        ['name' => 'Quality', 'cities' => 'Pest 4 · Pint · Larastan'],
+    $section = $aboutSection;
+    $regions = $section?->extra_data['regions'] ?? [
+        ['name' => 'Backend', 'detail' => 'Laravel · Node.js · Python · Go'],
+        ['name' => 'Frontend', 'detail' => 'React · Vue.js · Flutter · Livewire'],
+        ['name' => 'Infrastructure', 'detail' => 'AWS · GCP · Docker · Kubernetes'],
     ];
 @endphp
 
@@ -12,14 +15,18 @@
         <div class="grid gap-16 lg:grid-cols-12 lg:items-center lg:gap-8">
             <div class="landing-reveal lg:col-span-5">
                 <p class="font-mono text-sm uppercase tracking-widest text-brand-accent">
-                    Foundation
+                    Tentang Kami
                 </p>
                 <h2 class="mt-4 font-display text-4xl font-bold text-brand-snow sm:text-5xl">
-                    One codebase.
-                    <span class="block font-light text-brand-accent italic">Every client project.</span>
+                    {{ $section?->title ?? 'Tentang Kami' }}
+                    <span class="block font-light text-brand-accent italic">{{ $section?->subtitle ?? 'Membangun masa depan digital bersama' }}</span>
                 </h2>
                 <p class="mt-6 text-lg text-brand-silver">
-                    Clone this starter kit for each new engagement and keep the same reliable core: auth, roles, and a blog ready to publish.
+                    @if ($section?->body)
+                        {{ Str::limit(strip_tags($section->body), 300) }}
+                    @else
+                        PT. Reka Mitra Teknologi adalah perusahaan teknologi informasi yang berfokus pada pengembangan solusi digital inovatif untuk mendukung transformasi digital bisnis Anda.
+                    @endif
                 </p>
 
                 <div class="mt-10">
@@ -29,7 +36,7 @@
                                 <span class="landing-animate-pulse-soft size-2 rounded-full bg-brand-accent"></span>
                                 <span class="font-mono text-sm uppercase tracking-wide text-brand-snow">{{ $region['name'] }}</span>
                             </div>
-                            <span class="text-sm text-brand-silver">{{ $region['cities'] }}</span>
+                            <span class="text-sm text-brand-silver">{{ $region['detail'] }}</span>
                         </div>
                     @endforeach
                 </div>
@@ -42,22 +49,22 @@
                     <div class="relative flex items-center gap-2">
                         <span class="landing-animate-pulse-soft size-2 rounded-full bg-green-400"></span>
                         <span class="font-mono text-xs uppercase tracking-widest text-brand-silver">
-                            Test Suite &middot; All checks passing
+                            Pengalaman &middot; Terpercaya
                         </span>
                     </div>
 
                     <div class="relative mt-24 grid grid-cols-2 gap-8 sm:mt-40">
                         <div>
                             <p class="font-display text-4xl font-bold text-brand-snow sm:text-5xl">
-                                102
+                                150+
                             </p>
-                            <p class="mt-2 font-mono text-xs uppercase tracking-widest text-brand-silver">Tests Passing</p>
+                            <p class="mt-2 font-mono text-xs uppercase tracking-widest text-brand-silver">Proyek Selesai</p>
                         </div>
                         <div>
                             <p class="font-display text-4xl font-bold text-brand-snow sm:text-5xl">
-                                3
+                                50+
                             </p>
-                            <p class="mt-2 font-mono text-xs uppercase tracking-widest text-brand-silver">Roles Built In</p>
+                            <p class="mt-2 font-mono text-xs uppercase tracking-widest text-brand-silver">Klien Puas</p>
                         </div>
                     </div>
                 </div>

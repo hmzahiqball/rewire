@@ -1,5 +1,5 @@
 @php
-    $logos = ['Laravel', 'Livewire', 'Flux UI', 'Pest', 'Tailwind', 'Spatie'];
+    $logos = ['Laravel', 'React', 'Flutter', 'AWS', 'Docker', 'Kubernetes'];
 @endphp
 
 <section class="border-y border-brand-navy/10 bg-brand-snow py-14">
@@ -7,7 +7,7 @@
         <div class="landing-reveal mb-10 flex items-center justify-center gap-4">
             <span class="h-px flex-1 max-w-24 bg-brand-navy/15"></span>
             <p class="whitespace-nowrap font-mono text-xs font-medium uppercase tracking-[0.25em] text-brand-navy/50">
-                Built with tools you already trust
+                Teknologi yang kami gunakan
             </p>
             <span class="h-px flex-1 max-w-24 bg-brand-navy/15"></span>
         </div>

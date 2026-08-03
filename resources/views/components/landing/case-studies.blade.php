@@ -1,25 +1,14 @@
+@props(['visionSection' => null])
+
 @php
-    $items = [
-        [
-            'category' => 'Internal tool',
-            'year' => '2026',
-            'title' => 'Spin up an admin-gated back office in an afternoon.',
-            'description' => 'Roles, a blog, and an authenticated dashboard are already wired together — customize the parts that make this project unique.',
-            'metrics' => [
-                ['value' => '1', 'label' => 'Afternoon'],
-                ['value' => '0', 'label' => 'Boilerplate'],
-            ],
-        ],
-        [
-            'category' => 'Client site',
-            'year' => '2026',
-            'title' => 'Give your client a blog they can run themselves.',
-            'description' => 'Every post — title, images, publish state — is managed from the dashboard by any signed-in team member, so content updates never need a developer.',
-            'metrics' => [
-                ['value' => '1', 'label' => 'Blog, ready to go'],
-                ['value' => '0', 'label' => 'Redeploys needed'],
-            ],
-        ],
+    $section = $visionSection;
+    $extraData = $section?->extra_data ?? [];
+    $vision = $extraData['vision'] ?? 'Menjadi mitra teknologi terdepan di Indonesia yang menghadirkan solusi digital inovatif dan berdampak positif bagi pertumbuhan bisnis klien.';
+    $missions = $extraData['missions'] ?? [
+        'Mengembangkan solusi teknologi yang inovatif, scalable, dan berkualitas tinggi.',
+        'Membangun hubungan jangka panjang dengan klien melalui layanan yang profesional dan responsif.',
+        'Terus berinovasi dan mengadopsi teknologi terkini untuk memberikan nilai tambah maksimal.',
+        'Mengembangkan talenta digital lokal yang kompeten dan berdaya saing global.',
     ];
 @endphp
 
@@ -27,77 +16,78 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="landing-reveal max-w-2xl">
             <p class="font-mono text-sm uppercase tracking-widest text-brand-accent-dark">
-                Solutions
+                Visi & Misi
             </p>
             <h2 class="mt-4 font-display text-4xl font-bold tracking-tight text-brand-navy sm:text-5xl">
-                Built for how client work actually happens
+                {{ $section?->title ?? 'Visi & Misi Kami' }}
             </h2>
         </div>
 
         <div class="mt-16 grid gap-8 lg:grid-cols-2">
-            @foreach ($items as $item)
-                @if ($loop->first)
-                    <div class="landing-reveal landing-reveal-delay-1 rounded-3xl bg-brand-navy p-10 sm:p-12">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-xs uppercase tracking-widest text-brand-accent">
-                                {{ $item['category'] }}
-                            </span>
-                            <span class="font-mono text-xs text-brand-snow/60">
-                                {{ $item['year'] }}
-                            </span>
-                        </div>
-                        <h3 class="mt-6 font-display text-3xl font-bold text-brand-snow sm:text-4xl">
-                            {{ $item['title'] }}
-                        </h3>
-                        <p class="mt-4 text-lg leading-relaxed text-brand-snow/80">
-                            {{ $item['description'] }}
-                        </p>
+            {{-- Vision Card --}}
+            <div class="landing-reveal landing-reveal-delay-1 rounded-3xl bg-brand-navy p-10 sm:p-12">
+                <div class="flex items-center justify-between">
+                    <span class="font-mono text-xs uppercase tracking-widest text-brand-accent">
+                        Visi
+                    </span>
+                    <span class="font-mono text-xs text-brand-snow/60">
+                        <x-landing.icon name="star" class="inline size-4" />
+                    </span>
+                </div>
+                <h3 class="mt-6 font-display text-3xl font-bold text-brand-snow sm:text-4xl">
+                    Visi Perusahaan
+                </h3>
+                <p class="mt-4 text-lg leading-relaxed text-brand-snow/80">
+                    {{ $vision }}
+                </p>
 
-                        <div class="mt-10 grid grid-cols-2 gap-6 border-t border-white/10 pt-8 sm:grid-cols-3">
-                            @foreach ($item['metrics'] as $metric)
-                                <div>
-                                    <p class="font-display text-3xl font-bold text-brand-accent">
-                                        {{ $metric['value'] }}
-                                    </p>
-                                    <p class="mt-1 text-xs text-brand-snow/60">
-                                        {{ $metric['label'] }}
-                                    </p>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @else
-                    <div class="landing-reveal landing-card-hover landing-reveal-delay-{{ min($loop->index + 1, 4) }} rounded-3xl border border-brand-navy/10 bg-brand-snow p-10 sm:p-12">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-xs uppercase tracking-widest text-brand-accent-dark">
-                                {{ $item['category'] }}
-                            </span>
-                            <span class="font-mono text-xs text-brand-navy/50">
-                                {{ $item['year'] }}
-                            </span>
-                        </div>
-                        <h3 class="mt-6 font-display text-2xl font-bold text-brand-navy">
-                            {{ $item['title'] }}
-                        </h3>
-                        <p class="mt-4 leading-relaxed text-brand-navy/70">
-                            {{ $item['description'] }}
+                <div class="mt-10 grid grid-cols-2 gap-6 border-t border-white/10 pt-8 sm:grid-cols-3">
+                    <div>
+                        <p class="font-display text-3xl font-bold text-brand-accent">
+                            #1
                         </p>
-
-                        <div class="mt-10 grid grid-cols-2 gap-6 border-t border-brand-navy/10 pt-8 sm:grid-cols-3">
-                            @foreach ($item['metrics'] as $metric)
-                                <div>
-                                    <p class="font-display text-3xl font-bold text-brand-accent-dark">
-                                        {{ $metric['value'] }}
-                                    </p>
-                                    <p class="mt-1 text-xs text-brand-navy/50">
-                                        {{ $metric['label'] }}
-                                    </p>
-                                </div>
-                            @endforeach
-                        </div>
+                        <p class="mt-1 text-xs text-brand-snow/60">
+                            Mitra Teknologi Pilihan
+                        </p>
                     </div>
-                @endif
-            @endforeach
+                    <div>
+                        <p class="font-display text-3xl font-bold text-brand-accent">
+                            ∞
+                        </p>
+                        <p class="mt-1 text-xs text-brand-snow/60">
+                            Komitmen Inovasi
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Mission Card --}}
+            <div class="landing-reveal landing-card-hover landing-reveal-delay-2 rounded-3xl border border-brand-navy/10 bg-brand-snow p-10 sm:p-12">
+                <div class="flex items-center justify-between">
+                    <span class="font-mono text-xs uppercase tracking-widest text-brand-accent-dark">
+                        Misi
+                    </span>
+                    <span class="font-mono text-xs text-brand-navy/50">
+                        <x-landing.icon name="compass" class="inline size-4" />
+                    </span>
+                </div>
+                <h3 class="mt-6 font-display text-2xl font-bold text-brand-navy">
+                    Misi Perusahaan
+                </h3>
+
+                <div class="mt-6 space-y-4">
+                    @foreach ($missions as $index => $mission)
+                        <div class="flex items-start gap-4">
+                            <span class="flex size-8 shrink-0 items-center justify-center rounded-full bg-brand-accent/10 font-mono text-xs font-bold text-brand-accent-dark">
+                                {{ $index + 1 }}
+                            </span>
+                            <p class="text-sm leading-relaxed text-brand-navy/70">
+                                {{ $mission }}
+                            </p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 </section>

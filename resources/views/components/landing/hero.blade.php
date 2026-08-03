@@ -1,9 +1,13 @@
+@props(['heroSection' => null])
+
 @php
-    $stats = [
-        ['value' => '12', 'suffix' => '', 'label' => 'Packages included'],
-        ['value' => '3', 'suffix' => '', 'label' => 'Roles built in'],
-        ['value' => '8', 'suffix' => '', 'label' => 'Landing page sections'],
-    ];
+    $section = $heroSection;
+    $extraData = $section?->extra_data ?? [];
+    $stats = $extraData['stats'] ?? [];
+    $badge = $extraData['badge_text'] ?? 'Solusi Digital Terpercaya';
+    $badgeHighlight = $extraData['badge_highlight'] ?? 'Sejak 2018';
+    $ctaPrimary = $extraData['cta_primary'] ?? 'Konsultasi Gratis';
+    $ctaSecondary = $extraData['cta_secondary'] ?? 'Lihat Layanan';
 @endphp
 
 <section id="hero" class="relative h-screen overflow-hidden bg-brand-navy">
@@ -15,47 +19,53 @@
     <div class="relative mx-auto grid h-full max-w-7xl grid-cols-1 content-center items-center gap-16 px-6 lg:grid-cols-2">
         <div>
             <div class="landing-reveal inline-flex items-center gap-2 rounded-full border border-brand-snow/10 bg-brand-snow/5 px-4 py-1.5 font-mono text-xs text-brand-snow backdrop-blur-sm">
-                <span>Built on Laravel &amp; Livewire</span>
+                <span>{{ $badge }}</span>
                 <span class="text-brand-snow/30">/</span>
-                <span class="text-brand-accent">Ready for your next client project</span>
+                <span class="text-brand-accent">{{ $badgeHighlight }}</span>
             </div>
 
             <h1 class="landing-reveal landing-reveal-delay-1 mt-6 font-display text-5xl leading-[1.05] font-semibold tracking-tight text-brand-snow sm:text-6xl">
-                Ship your next<br>
-                <span class="text-brand-accent underline decoration-brand-accent/40 decoration-8 underline-offset-4">client project</span><br>
-                in days, not weeks.
+                @if ($section)
+                    {!! nl2br(e($section->title)) !!}
+                @else
+                    Mitra Teknologi Terpercaya<br>
+                    <span class="text-brand-accent underline decoration-brand-accent/40 decoration-8 underline-offset-4">Solusi Digital</span><br>
+                    untuk Bisnis Anda.
+                @endif
             </h1>
 
             <p class="landing-reveal landing-reveal-delay-2 mt-6 max-w-xl text-lg text-brand-silver/80">
-                A reusable Laravel starter kit with authentication, roles, and a blog ready to publish — so every new project starts from a working foundation, not a blank repo.
+                {{ $section?->subtitle ?? 'PT. Reka Mitra Teknologi menghadirkan solusi teknologi inovatif yang mendorong transformasi digital bisnis Anda.' }}
             </p>
 
             <div class="landing-reveal landing-reveal-delay-3 mt-10 flex flex-wrap items-center gap-4">
                 <a href="{{ route('home') }}#contact" class="inline-flex items-center gap-2 rounded-full bg-brand-accent px-6 py-3 text-sm font-medium text-brand-navy transition hover:bg-brand-accent-dark">
-                    Get started
+                    {{ $ctaPrimary }}
                     <x-landing.icon name="arrow-right" class="size-4" />
                 </a>
                 <a href="{{ route('home') }}#services" class="inline-flex items-center gap-2 rounded-full border border-brand-snow/20 px-6 py-3 text-sm font-medium text-brand-snow transition hover:bg-brand-snow/10">
-                    Explore features
+                    {{ $ctaSecondary }}
                 </a>
             </div>
 
-            <div class="landing-reveal landing-reveal-delay-4 mt-16 flex flex-wrap gap-10">
-                @foreach ($stats as $stat)
-                    <div>
-                        <div class="font-display text-4xl font-semibold text-brand-snow">
-                            @if (is_numeric($stat['value']))
-                                <span class="landing-counter" data-target="{{ $stat['value'] }}" data-decimals="0">0</span>{{ $stat['suffix'] }}
-                            @else
-                                {{ $stat['value'] }}{{ $stat['suffix'] }}
-                            @endif
+            @if (count($stats) > 0)
+                <div class="landing-reveal landing-reveal-delay-4 mt-16 flex flex-wrap gap-10">
+                    @foreach ($stats as $stat)
+                        <div>
+                            <div class="font-display text-4xl font-semibold text-brand-snow">
+                                @if (is_numeric($stat['value']))
+                                    <span class="landing-counter" data-target="{{ $stat['value'] }}" data-decimals="0">0</span>{{ $stat['suffix'] ?? '' }}
+                                @else
+                                    {{ $stat['value'] }}{{ $stat['suffix'] ?? '' }}
+                                @endif
+                            </div>
+                            <div class="mt-1 font-mono text-xs tracking-wide text-brand-silver/60 uppercase">
+                                {{ $stat['label'] }}
+                            </div>
                         </div>
-                        <div class="mt-1 font-mono text-xs tracking-wide text-brand-silver/60 uppercase">
-                            {{ $stat['label'] }}
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
 
         <div class="relative hidden h-[28rem] items-center justify-center lg:flex">
@@ -77,14 +87,14 @@
                 <span class="flex size-8 items-center justify-center rounded-full bg-brand-accent/10 text-brand-accent-dark">
                     <x-landing.icon name="check" class="size-4" />
                 </span>
-                <span class="font-mono text-xs font-medium text-brand-navy">All systems go</span>
+                <span class="font-mono text-xs font-medium text-brand-navy">Solusi Terpercaya</span>
             </div>
 
             <div class="landing-animate-float-slow absolute right-0 bottom-8 flex items-center gap-3 rounded-2xl bg-brand-snow p-4 shadow-xl">
                 <span class="flex size-8 items-center justify-center rounded-full bg-brand-navy/10 text-brand-navy">
                     <x-landing.icon name="cloud" class="size-4" />
                 </span>
-                <span class="font-mono text-xs font-medium text-brand-navy">No page reloads</span>
+                <span class="font-mono text-xs font-medium text-brand-navy">Teknologi Modern</span>
             </div>
 
             <div class="landing-animate-float absolute top-1/2 -right-2 flex -translate-y-1/2 items-center gap-2 rounded-xl bg-brand-snow p-3 shadow-lg" style="animation-delay: 2s;">
@@ -92,11 +102,11 @@
                     <span class="landing-animate-pulse-soft absolute inline-flex size-full rounded-full bg-green-400"></span>
                     <span class="relative inline-flex size-2 rounded-full bg-green-500"></span>
                 </span>
-                <span class="font-mono text-xs font-medium text-brand-navy">Tests passing</span>
+                <span class="font-mono text-xs font-medium text-brand-navy">150+ Proyek</span>
             </div>
 
             <div class="absolute bottom-0 left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-wider text-brand-silver/40">
-                MIT LICENSED &middot; OPEN SOURCE
+                PT. REKA MITRA TEKNOLOGI
             </div>
         </div>
     </div>
