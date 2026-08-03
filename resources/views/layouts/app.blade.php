@@ -33,6 +33,9 @@
                     <flux:sidebar.item icon="document-text" :href="route('content-management.pages')" :current="request()->routeIs('content-management.pages')" wire:navigate>
                         Pages
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="photo" :href="route('content-management.gallery')" :current="request()->routeIs('content-management.gallery')" wire:navigate>
+                        Gallery
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
 
                 @role('super-admin|admin')

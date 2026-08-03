@@ -13,6 +13,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::livewire('blogs', 'pages::app.content-management.blogs')->name('blogs');
         Route::livewire('services', 'pages::app.content-management.services')->name('services');
         Route::livewire('pages', 'pages::app.content-management.pages')->name('pages');
+        Route::livewire('gallery', 'pages::app.content-management.gallery')->name('gallery');
     });
 
     Route::middleware(['role:super-admin|admin'])->prefix('system')->name('system.')->group(function () {
