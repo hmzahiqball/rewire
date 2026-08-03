@@ -7,6 +7,8 @@ Route::controller(MainController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/blog', 'blogs')->name('blogs');
     Route::get('/blog/{slug}', 'blogDetail')->name('blog.detail');
+    Route::get('/gallery', 'gallery')->name('gallery');
+    Route::get('/service/{slug}', 'serviceDetail')->name('service.detail');
     Route::get('/sitemap.xml', 'sitemap')->name('sitemap');
 });
 
