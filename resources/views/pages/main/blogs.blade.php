@@ -7,7 +7,7 @@
                     Insights &amp; updates
                 </h1>
                 <p class="mt-4 text-lg leading-relaxed text-brand-silver/80">
-                    News, guides, and updates from the Rewire Starter Kit team.
+                    Insights, panduan, dan berita terkini dari tim Reka Mitra Teknologi.
                 </p>
             </div>
         </div>
@@ -40,7 +40,7 @@
                                     <p class="mt-3 flex-1 text-sm leading-relaxed text-brand-navy/70">{{ $post->excerpt }}</p>
                                 @endif
                                 <div class="mt-6 flex items-center gap-2 text-xs text-brand-navy/50">
-                                    <span>{{ $post->author?->name ?? 'Rewire Starter Kit' }}</span>
+                                    <span>{{ $post->author?->name ?? 'Reka Mitra Teknologi' }}</span>
                                     <span>&middot;</span>
                                     <span>{{ $post->created_at->translatedFormat('l, j F Y') }}</span>
                                 </div>

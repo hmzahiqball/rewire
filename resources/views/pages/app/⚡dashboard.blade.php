@@ -12,7 +12,7 @@ new #[Title('Dashboard')] class extends Component
 <div class="w-full space-y-6">
     <div>
         <flux:heading size="xl">Welcome back, {{ Auth::user()->name }}</flux:heading>
-        <flux:subheading>{{ now()->translatedFormat('l, j F Y') }} — here's what's happening with Rewire today.</flux:subheading>
+        <flux:subheading>{{ now()->translatedFormat('l, j F Y') }} — ringkasan aktivitas hari ini.</flux:subheading>
     </div>
 
     @role('super-admin')

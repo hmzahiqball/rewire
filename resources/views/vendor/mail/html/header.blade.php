@@ -2,7 +2,7 @@
 <tr>
 <td class="header">
 <a href="{{ $url }}" style="display: inline-block;">
-<img src="{{ asset('images/logo.png') }}" class="logo" alt="Rewire Starter Kit">
+<img src="{{ asset('images/logo.png') }}" class="logo" alt="Reka Mitra Teknologi">
 </a>
 </td>
 </tr>
