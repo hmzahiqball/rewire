@@ -27,7 +27,7 @@
                     @endif
 
                     <div class="prose prose-lg prose-zinc max-w-none prose-headings:font-display prose-headings:font-bold prose-headings:text-brand-navy prose-a:text-brand-accent-dark hover:prose-a:text-brand-accent prose-img:rounded-2xl">
-                        {!! str($service->body)->markdown()->sanitizeHtml() !!}
+                        {!! str($service->body)->markdown(['html_input' => 'strip']) !!}
                     </div>
 
                     <div class="mt-16 rounded-3xl bg-brand-navy p-8 sm:p-12 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-8">

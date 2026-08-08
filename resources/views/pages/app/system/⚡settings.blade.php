@@ -42,7 +42,7 @@ new #[Title('Settings')] class extends Component
     {
         $this->validate([
             'seoDescription' => ['nullable', 'string', 'max:255'],
-            'analyticsId' => ['nullable', 'string', 'max:64'],
+            'analyticsId' => ['nullable', 'string', 'max:64', 'regex:/^(G-|GTM-|UA-)[A-Za-z0-9-]+$/'],
             'socialLinkedin' => ['nullable', 'url', 'max:255'],
             'socialTwitter' => ['nullable', 'url', 'max:255'],
             'socialGithub' => ['nullable', 'url', 'max:255'],

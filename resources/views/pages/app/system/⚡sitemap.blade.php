@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Post;
+use App\Models\Service;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -16,6 +17,7 @@ new #[Title('Sitemap')] class extends Component
         $entries = [
             ['label' => 'Home', 'url' => route('home'), 'type' => 'Page', 'lastModified' => null],
             ['label' => 'Blog index', 'url' => route('blogs'), 'type' => 'Page', 'lastModified' => null],
+            ['label' => 'Gallery', 'url' => route('gallery'), 'type' => 'Page', 'lastModified' => null],
         ];
 
         foreach (Post::query()->published()->latest()->get() as $post) {
@@ -24,6 +26,15 @@ new #[Title('Sitemap')] class extends Component
                 'url' => route('blog.detail', $post->slug),
                 'type' => 'Post',
                 'lastModified' => $post->updated_at,
+            ];
+        }
+
+        foreach (Service::query()->published()->orderBy('sort_order')->get() as $service) {
+            $entries[] = [
+                'label' => $service->title,
+                'url' => route('service.detail', $service->slug),
+                'type' => 'Service',
+                'lastModified' => $service->updated_at,
             ];
         }
 

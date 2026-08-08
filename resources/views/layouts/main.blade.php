@@ -15,12 +15,12 @@
         @endif
 
         @if ($analyticsId)
-            <script async src="https://www.googletagmanager.com/gtag/js?id={{ $analyticsId }}"></script>
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ urlencode($analyticsId) }}"></script>
             <script>
                 window.dataLayer = window.dataLayer || [];
                 function gtag() { dataLayer.push(arguments); }
                 gtag('js', new Date());
-                gtag('config', '{{ $analyticsId }}');
+                gtag('config', {!! \Illuminate\Support\Js::from($analyticsId) !!});
             </script>
         @endif
     </head>
