@@ -115,11 +115,20 @@ new #[Title('Users')] class extends Component
             return;
         }
 
-        activity('users')->performedOn($user)->log("{$user->name} ({$user->email}) was deleted");
+        if ($user->hasRole('super-admin') && ! Auth::user()->hasRole('super-admin')) {
+            Flux::toast(variant: 'danger', text: "You cannot delete a super admin's account.");
+
+            return;
+        }
+
+        $name = $user->name;
+        $email = $user->email;
 
         $user->delete();
 
-        Flux::toast(variant: 'success', text: "{$user->name} was deleted.");
+        activity('users')->log("{$name} ({$email}) was deleted");
+
+        Flux::toast(variant: 'success', text: "{$name} was deleted.");
     }
 
     /**

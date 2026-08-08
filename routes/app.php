@@ -9,7 +9,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::livewire('docs', 'pages::app.other.docs')->name('docs');
     });
 
-    Route::prefix('content-management')->name('content-management.')->group(function () {
+    Route::middleware(['role:super-admin|admin'])->prefix('content-management')->name('content-management.')->group(function () {
         Route::livewire('blogs', 'pages::app.content-management.blogs')->name('blogs');
         Route::livewire('services', 'pages::app.content-management.services')->name('services');
         Route::livewire('pages', 'pages::app.content-management.pages')->name('pages');

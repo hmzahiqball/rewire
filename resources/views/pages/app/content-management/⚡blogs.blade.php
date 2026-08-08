@@ -1,5 +1,6 @@
 <?php
 
+use App\Concerns\AuthorizesContentManagement;
 use App\Models\Post;
 use Flux\Flux;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,7 @@ use Livewire\WithPagination;
 
 new #[Title('Blog')] class extends Component
 {
-    use WithFileUploads, WithPagination;
+    use AuthorizesContentManagement, WithFileUploads, WithPagination;
 
     public string $search = '';
 
@@ -34,6 +35,8 @@ new #[Title('Blog')] class extends Component
 
     public function create(): void
     {
+        $this->authorizeCmsAction();
+
         $this->resetForm();
 
         Flux::modal('post-form')->show();
@@ -41,6 +44,8 @@ new #[Title('Blog')] class extends Component
 
     public function edit(int $postId): void
     {
+        $this->authorizeCmsAction();
+
         $post = Post::query()->findOrFail($postId);
 
         $this->editingPost = $post;
@@ -55,11 +60,15 @@ new #[Title('Blog')] class extends Component
 
     public function removeFeaturedImage(): void
     {
+        $this->authorizeCmsAction();
+
         $this->editingPost?->clearMediaCollection('featured_image');
     }
 
     public function save(): void
     {
+        $this->authorizeCmsAction();
+
         $this->validate([
             'title' => ['required', 'string', 'max:255'],
             'excerpt' => ['nullable', 'string', 'max:500'],
@@ -101,6 +110,8 @@ new #[Title('Blog')] class extends Component
 
     public function delete(int $postId): void
     {
+        $this->authorizeCmsAction();
+
         $post = Post::query()->findOrFail($postId);
 
         $title = $post->title;

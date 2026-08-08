@@ -1,5 +1,6 @@
 <?php
 
+use App\Concerns\AuthorizesContentManagement;
 use App\Models\GalleryItem;
 use Flux\Flux;
 use Livewire\Attributes\Computed;
@@ -10,7 +11,7 @@ use Livewire\WithPagination;
 
 new #[Title('Gallery')] class extends Component
 {
-    use WithFileUploads, WithPagination;
+    use AuthorizesContentManagement, WithFileUploads, WithPagination;
 
     public string $search = '';
 
@@ -35,6 +36,8 @@ new #[Title('Gallery')] class extends Component
 
     public function create(): void
     {
+        $this->authorizeCmsAction();
+
         $this->resetForm();
 
         Flux::modal('gallery-form')->show();
@@ -42,6 +45,8 @@ new #[Title('Gallery')] class extends Component
 
     public function edit(int $itemId): void
     {
+        $this->authorizeCmsAction();
+
         $item = GalleryItem::query()->findOrFail($itemId);
 
         $this->editingItem = $item;
@@ -57,11 +62,15 @@ new #[Title('Gallery')] class extends Component
 
     public function removeGalleryImage(): void
     {
+        $this->authorizeCmsAction();
+
         $this->editingItem?->clearMediaCollection('gallery_image');
     }
 
     public function save(): void
     {
+        $this->authorizeCmsAction();
+
         $this->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:1000'],
@@ -104,6 +113,8 @@ new #[Title('Gallery')] class extends Component
 
     public function delete(int $itemId): void
     {
+        $this->authorizeCmsAction();
+
         $item = GalleryItem::query()->findOrFail($itemId);
 
         $title = $item->title;

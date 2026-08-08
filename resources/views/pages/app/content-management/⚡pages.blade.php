@@ -1,5 +1,6 @@
 <?php
 
+use App\Concerns\AuthorizesContentManagement;
 use App\Models\Page;
 use Flux\Flux;
 use Livewire\Attributes\Computed;
@@ -10,7 +11,7 @@ use Livewire\WithPagination;
 
 new #[Title('Pages')] class extends Component
 {
-    use WithFileUploads, WithPagination;
+    use AuthorizesContentManagement, WithFileUploads, WithPagination;
 
     public string $search = '';
 
@@ -39,6 +40,8 @@ new #[Title('Pages')] class extends Component
 
     public function create(): void
     {
+        $this->authorizeCmsAction();
+
         $this->resetForm();
 
         Flux::modal('page-form')->show();
@@ -46,6 +49,8 @@ new #[Title('Pages')] class extends Component
 
     public function edit(int $pageId): void
     {
+        $this->authorizeCmsAction();
+
         $page = Page::query()->findOrFail($pageId);
 
         $this->editingPage = $page;
@@ -63,11 +68,15 @@ new #[Title('Pages')] class extends Component
 
     public function removePageImage(): void
     {
+        $this->authorizeCmsAction();
+
         $this->editingPage?->clearMediaCollection('page_image');
     }
 
     public function save(): void
     {
+        $this->authorizeCmsAction();
+
         $rules = [
             'sectionKey' => ['required', 'string', 'max:100'],
             'title' => ['required', 'string', 'max:255'],
@@ -127,6 +136,8 @@ new #[Title('Pages')] class extends Component
 
     public function delete(int $pageId): void
     {
+        $this->authorizeCmsAction();
+
         $page = Page::query()->findOrFail($pageId);
 
         $title = $page->title;

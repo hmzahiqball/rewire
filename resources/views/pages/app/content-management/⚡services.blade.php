@@ -1,5 +1,6 @@
 <?php
 
+use App\Concerns\AuthorizesContentManagement;
 use App\Models\Service;
 use Flux\Flux;
 use Livewire\Attributes\Computed;
@@ -10,7 +11,7 @@ use Livewire\WithPagination;
 
 new #[Title('Services')] class extends Component
 {
-    use WithFileUploads, WithPagination;
+    use AuthorizesContentManagement, WithFileUploads, WithPagination;
 
     public string $search = '';
 
@@ -39,6 +40,8 @@ new #[Title('Services')] class extends Component
 
     public function create(): void
     {
+        $this->authorizeCmsAction();
+
         $this->resetForm();
 
         Flux::modal('service-form')->show();
@@ -46,6 +49,8 @@ new #[Title('Services')] class extends Component
 
     public function edit(int $serviceId): void
     {
+        $this->authorizeCmsAction();
+
         $service = Service::query()->findOrFail($serviceId);
 
         $this->editingService = $service;
@@ -63,11 +68,15 @@ new #[Title('Services')] class extends Component
 
     public function removeServiceImage(): void
     {
+        $this->authorizeCmsAction();
+
         $this->editingService?->clearMediaCollection('service_image');
     }
 
     public function save(): void
     {
+        $this->authorizeCmsAction();
+
         $this->validate([
             'title' => ['required', 'string', 'max:255'],
             'icon' => ['nullable', 'string', 'max:50'],
@@ -113,6 +122,8 @@ new #[Title('Services')] class extends Component
 
     public function delete(int $serviceId): void
     {
+        $this->authorizeCmsAction();
+
         $service = Service::query()->findOrFail($serviceId);
 
         $title = $service->title;
