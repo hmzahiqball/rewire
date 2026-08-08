@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SettingKey;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -18,14 +19,18 @@ class Setting extends Model
 {
     use LogsActivity;
 
-    public static function get(string $key, ?string $default = null): ?string
+    public static function get(string|SettingKey $key, ?string $default = null): ?string
     {
-        return self::cached()[$key] ?? $default;
+        $keyString = $key instanceof SettingKey ? $key->value : $key;
+
+        return self::cached()[$keyString] ?? $default;
     }
 
-    public static function put(string $key, ?string $value): void
+    public static function put(string|SettingKey $key, ?string $value): void
     {
-        static::query()->updateOrCreate(['key' => $key], ['value' => $value]);
+        $keyString = $key instanceof SettingKey ? $key->value : $key;
+
+        static::query()->updateOrCreate(['key' => $keyString], ['value' => $value]);
 
         Cache::forget('settings');
     }

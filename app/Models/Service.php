@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Concerns\LogsActivity;
 use Spatie\Activitylog\Support\LogOptions;
@@ -34,7 +35,7 @@ use Spatie\Sluggable\SlugOptions;
 class Service extends Model implements HasMedia
 {
     /** @use HasFactory<ServiceFactory> */
-    use HasFactory, HasSlug, InteractsWithMedia, LogsActivity;
+    use HasFactory, HasSlug, InteractsWithMedia, LogsActivity, SoftDeletes;
 
     /**
      * @return array<string, string>

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Spatie\Activitylog\Models\Concerns\LogsActivity;
 use Spatie\Activitylog\Support\LogOptions;
@@ -28,12 +29,13 @@ use Spatie\Sluggable\SlugOptions;
  * @property bool $is_published
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  */
 #[Fillable(['author_id', 'title', 'slug', 'excerpt', 'body', 'is_published'])]
 class Post extends Model implements HasMedia
 {
     /** @use HasFactory<PostFactory> */
-    use HasFactory, HasSlug, InteractsWithMedia, LogsActivity;
+    use HasFactory, HasSlug, InteractsWithMedia, LogsActivity, SoftDeletes;
 
     /**
      * @return array<string, string>

@@ -1,4 +1,4 @@
-<x-layouts::main title="Blog">
+<x-layouts::main title="Blog" seo-description="Insights, panduan, dan berita terkini dari tim Reka Mitra Teknologi.">
     <section class="landing-grid-bg relative overflow-hidden bg-brand-navy pt-32 pb-20 sm:pt-40 sm:pb-24">
         <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
             <div class="landing-reveal max-w-2xl">
